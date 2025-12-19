@@ -37,8 +37,8 @@ const statusIndicator = document.getElementById('statusIndicator');
 const startInput = document.getElementById('start');
 const endInput = document.getElementById('end');
 
-// API Configuration
-const API_URL = 'http://localhost:8000';
+// API Configuration (FIXED)
+const API_URL = window.location.origin;
 let serverOnline = false;
 
 // Check server status
@@ -48,21 +48,22 @@ async function checkServerStatus() {
       method: 'GET',
       signal: AbortSignal.timeout(3000)
     });
-    
+
     if (response.ok) {
       serverOnline = true;
       statusIndicator.className = 'status-indicator status-online';
-      statusIndicator.innerHTML = '<div class="status-dot"></div><span>Server Online</span>';
+      statusIndicator.innerHTML =
+        '<div class="status-dot"></div><span>Server Online</span>';
     } else {
-      throw new Error('Server not responding');
+      throw new Error();
     }
-  } catch (error) {
+  } catch {
     serverOnline = false;
     statusIndicator.className = 'status-indicator status-offline';
-    statusIndicator.innerHTML = '<div class="status-dot"></div><span>Server Offline - Start Python backend</span>';
+    statusIndicator.innerHTML =
+      '<div class="status-dot"></div><span>Backend Unreachable</span>';
   }
 }
-
 // Call Python backend API to get paths
 async function getPathsFromBackend(start, end) {
   try {
@@ -308,4 +309,5 @@ endInput.addEventListener('keypress', (e) => {
 // Initialize
 checkServerStatus();
 setInterval(checkServerStatus, 5000); // Check server status every 5 seconds
+
 drawGraph(); // Draw initial empty graph
