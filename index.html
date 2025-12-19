@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Path Finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="statusIndicator" class="status-indicator status-offline">
+    <div class="status-dot"></div>
+    <span>Connecting to server...</span>
+  </div>
+
+  <h1> Graph Path Finder</h1>
+  
+  <div class="container">
+    <div class="controls">
+      <div class="input-group">
+        <label>Start Node</label>
+        <input id="start" value="A" maxlength="1">
+      </div>
+      <div class="input-group">
+        <label>End Node</label>
+        <input id="end" value="J" maxlength="1">
+      </div>
+      <button id="findBtn">
+        <span id="btnText">Find Paths</span>
+        <span id="btnLoader" class="loading" style="display: none;"></span>
+      </button>
+    </div>
+
+    <canvas id="graphCanvas" width="800" height="500"></canvas>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color" style="background: #2196F3; height: 6px;"></div>
+        <span>Shortest Path</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #f44336; height: 6px;"></div>
+        <span>Second Shortest Path</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color" style="background: #999;"></div>
+        <span>Other Edges</span>
+      </div>
+    </div>
+
+    <div id="resultSection"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
