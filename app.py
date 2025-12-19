@@ -161,7 +161,15 @@ async def get_paths(request: PathRequest):
 async def get_graph():
     """Get the graph structure"""
     return {"graph": graph}
+    
+@app.get("/style.css")
+async def get_css():
+    return FileResponse("style.css")
 
+@app.get("/script.js")
+async def get_js():
+    return FileResponse("script.js")
+    
 # Mount static files (CSS, JS)
 if os.path.exists("static"):
     app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -169,4 +177,5 @@ if os.path.exists("static"):
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
+
     uvicorn.run(app, host="0.0.0.0", port=port)
